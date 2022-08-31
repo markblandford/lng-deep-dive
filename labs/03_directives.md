@@ -8,8 +8,6 @@
     - [Bonus: Working with Templates and Containers *](#bonus-working-with-templates-and-containers-)
   - [Structural Directives](#structural-directives)
     - [Implement a Simple DataTable](#implement-a-simple-datatable)
-    - [Bonus: Custom TemplateOutletDirective ***](#bonus-custom-templateoutletdirective-)
-
 
 ## Working with Attribute Directives
 
