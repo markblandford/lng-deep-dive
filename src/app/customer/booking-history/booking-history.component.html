@@ -1,0 +1,38 @@
+<h1>Booking History</h1>
+
+<app-tabbed-pane>
+  <app-tab title="Upcoming Flights">
+    <p>No upcoming flights!</p>
+  </app-tab>
+
+  <app-tab title="Operated Flights">
+    <p>No operated flights!</p>
+  </app-tab>
+
+  <app-tab title="Cancelled Flights">
+    <p>No cancelled flights!</p>
+  </app-tab>
+</app-tabbed-pane>
+
+<button type="button" (appClickWithWarning)="delete()" [warning]="'Do you really, really want to do that?'"
+  #cww="clickWithWarning">Delete</button>
+
+<button type="button" [ngClass]="cww.classes" (click)="cww.handleClick(true)">Delete without asking</button>
+
+<input [appTooltip]="tmpl">
+
+<ng-template #tmpl>
+  <div class="tt">
+    <h3>2 Tips for Success</h3>
+    <ol>
+      <li>Don't tell everything!</li>
+    </ol>
+  </div>
+</ng-template>
+
+<app-data-table [data]="flights">
+  <div *appTableField="let d as 'id'">{{d}}</div>
+  <div *appTableField="let d as 'from'">{{d}}</div>
+  <div *appTableField="let d as 'to'">{{d}}</div>
+  <div *appTableField="let d as 'date'">{{d | date:'dd.MM.yyyy HH:mm'}}</div>
+</app-data-table>

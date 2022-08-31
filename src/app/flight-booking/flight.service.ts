@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Flight } from './flight';
 
 @Injectable({
@@ -10,12 +10,18 @@ export class FlightService {
   // We will refactor this to an observable in a later exercise!
   flights: Flight[] = [];
 
+  private flightsSubject = new BehaviorSubject<Flight[]>([]);
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  readonly flights$ = this.flightsSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   load(from: string, to: string): void {
     this.find(from, to).subscribe({
       next: (flights) => {
         this.flights = flights;
+
+        this.flightsSubject.next(flights);
       },
       error: (err) => {
         console.error('error', err);
@@ -35,12 +41,17 @@ export class FlightService {
 
   delay(): void {
     const ONE_MINUTE = 1000 * 60;
-    const oldFlights = this.flights;
-    const oldFlight = oldFlights[0];
+    const oldFlight = { ...this.flights[0] };
     const oldDate = new Date(oldFlight.date);
 
     // Mutable
     oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE);
     oldFlight.date = oldDate.toISOString();
+
+    const newFlights = [oldFlight, ...this.flights.slice(1)];
+
+    this.flightsSubject.next(newFlights);
+
+    this.flights = newFlights;
   }
 }

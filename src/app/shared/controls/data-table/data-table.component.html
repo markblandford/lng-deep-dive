@@ -1,0 +1,15 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let f of fields" scope="col">{{ f.propName }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let f of fields">
+        <ng-container *ngTemplateOutlet="f.templateRef; context: { $implicit: row[f.propName] }">
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>

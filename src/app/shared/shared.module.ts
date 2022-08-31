@@ -10,6 +10,14 @@ import { FormsModule } from '@angular/forms';
 
 // Von der CLI eingefügt
 import { CityValidationDirective } from './validation/city-validation.directive';
+import { TabbedPaneComponent } from './controls/tabbed-pane/tabbed-pane.component';
+import { TabComponent } from './controls/tab/tab.component';
+import { TabNavigatorComponent } from './controls/tab-navigator/tab-navigator.component';
+import { TestFlightComponent } from './controls/test-flight/test-flight.component';
+import { ClickWithWarningDirective } from './controls/click-with-warning.directive';
+import { TooltipDirective } from './tooltip.directive';
+import { TableFieldDirective } from './controls/data-table/table-field.directive';
+import { DataTableComponent } from './controls/data-table/data-table.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -20,7 +28,15 @@ import { CityValidationDirective } from './validation/city-validation.directive'
     StatusFilterPipe,
 
     // Von der CLI eingefügt
-    CityValidationDirective
+    CityValidationDirective,
+    TabbedPaneComponent,
+    TabComponent,
+    TabNavigatorComponent,
+    TestFlightComponent,
+    ClickWithWarningDirective,
+    TooltipDirective,
+    TableFieldDirective,
+    DataTableComponent
   ],
   exports: [
     DateComponent,
@@ -31,7 +47,15 @@ import { CityValidationDirective } from './validation/city-validation.directive'
     CommonModule,
 
     // Neue Einträge
-    CityValidationDirective
+    CityValidationDirective,
+    TabbedPaneComponent,
+    TabComponent,
+    TabNavigatorComponent,
+    TestFlightComponent,
+    ClickWithWarningDirective,
+    TooltipDirective,
+    TableFieldDirective,
+    DataTableComponent
   ]
 })
 export class SharedModule {}
