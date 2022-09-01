@@ -26,14 +26,6 @@
             "prefix": ["app", "flight"],
             "style": "kebab-case"
           }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": ["app", "flight"],
-            "style": "camelCase"
-          }
         ]
       }
     },
