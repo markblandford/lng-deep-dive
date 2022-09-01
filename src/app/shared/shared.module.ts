@@ -1,3 +1,5 @@
+import { AuthService } from './auth/auth-service.service';
+import { AuthGuard } from './auth/auth.guard';
 // src/app/shared/shared.module.ts
 
 import { NgModule } from '@angular/core';
@@ -18,6 +20,7 @@ import { ClickWithWarningDirective } from './controls/click-with-warning.directi
 import { TooltipDirective } from './tooltip.directive';
 import { TableFieldDirective } from './controls/data-table/table-field.directive';
 import { DataTableComponent } from './controls/data-table/data-table.component';
+import { CanDeactivateGuard } from './deactivation/can-deactivate.guard';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -56,6 +59,7 @@ import { DataTableComponent } from './controls/data-table/data-table.component';
     TooltipDirective,
     TableFieldDirective,
     DataTableComponent
-  ]
+  ],
+  providers: [AuthGuard, CanDeactivateGuard]
 })
 export class SharedModule {}

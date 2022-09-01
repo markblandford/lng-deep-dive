@@ -6,3 +6,53 @@
 <p>
   ShowDetail: {{showDetails}}
 </p>
+
+<form [formGroup]="editForm">
+  <div class="form-group">
+    <label>
+      ID:
+      <input type="text" formControlName="id">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label>
+      Date:
+      <input type="datetime-local" formControlName="date">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label>
+      From:
+      <input type="text" formControlName="from">
+    </label>
+    <div class="text-danger" *ngIf="editForm?.controls?.from?.errors as errors">
+      <ng-container *ngIf="errors['city'] as cityErr">
+        <ng-container *ngTemplateOutlet="invalidCity; context: { validCities: cityErr.validCities}"></ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>
+      To:
+      <input type="text" formControlName="to">
+    </label>
+    <div class="text-danger" *ngIf="editForm?.controls?.to?.errors as errors">
+      <ng-container *ngIf="errors['city'] as cityErr">
+        <ng-container *ngTemplateOutlet="invalidCity; context: { validCities: cityErr.validCities}"></ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button (click)="save()" class="btn btn-default">Save</button>
+  </div>
+
+</form>
+
+<ng-template #invalidCity let-validCities="validCities">
+  Invalid city.<br>
+  Please use one of {{ validCities }}
+</ng-template>

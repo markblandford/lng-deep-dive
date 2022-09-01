@@ -1,3 +1,4 @@
+import { BasketComponent } from './basket/basket.component';
 // src/app/app.routes.ts
 
 import { Routes } from '@angular/router';
@@ -18,6 +19,11 @@ export const APP_ROUTES: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'basket',
+    component: BasketComponent,
+    outlet: 'aux'
   },
   {
     path: '**',

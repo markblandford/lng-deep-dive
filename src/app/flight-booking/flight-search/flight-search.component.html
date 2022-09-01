@@ -2,13 +2,23 @@
 
 <h1>Flight Search</h1>
 
-<!-- Ergänzen Sie den form-Tag und weisen  -->
-<!-- Sie ihm eine Template-Variable zu: -->
 <ng-container *ngIf="flights$ | async as flights">
-  <form #f="ngForm">
+  <form #flightSearchForm="ngForm">
     <div class="form-group">
       <label>From:</label>
-      <input [(ngModel)]="from" [ngModelOptions]="{ updateOn: 'change'}" name="from" class="form-control">
+      <input [(ngModel)]="from" [ngModelOptions]="{ updateOn: 'change'}" name="from" class="form-control" required
+        minlength="3" maxlength="15" pattern="[a-zA-ZäöüÄÖÜß ]*" [city]="['Graz', 'Hamburg']" planet="Earth">
+
+      <ng-container *ngIf="flightSearchForm.controls.from?.errors as errors">
+        <dl class="text-danger">
+          <div *ngFor="let e of errors | keyvalue">
+            <dt>{{ e.key }}</dt>
+            <dd *ngFor="let v of e.value | keyvalue | slice:1">
+              {{ v.value | json }}
+            </dd>
+          </div>
+        </dl>
+      </ng-container>
     </div>
 
     <div class="form-group">

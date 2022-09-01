@@ -39,3 +39,17 @@
   <button (appClickWithWarning)="onOutput()">...</button>
 ```
 
+## Day 2
+
+### Webpack build analyzer
+
+```bash
+  ng b --stats-json
+
+  npm i -g webpack-bundle-analyzer
+
+  // cd ... to build
+
+  webpack-bundle-analyzer stats.json
+```
+

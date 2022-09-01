@@ -1,16 +1,14 @@
 // src/app/shared/validation/city-validation.directive.ts
 
 // forwardRef importieren:
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 // Diesen Import ergänzen:
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 @Directive({
-  // Selektor aktualisieren:
-  selector: 'input[appCity]',
-
-  // Provider eintragen:
+  // eslint-disable-next-line @angular-eslint/directive-selector
+  selector: 'input[city][planet]',
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -20,15 +18,22 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
   ]
 })
 export class CityValidationDirective implements Validator {
-  // Das Interface Validator und somit
-  // dessen Methode validate implementieren
+  @Input() city: Array<string>;
+  @Input() planet: string;
+
   public validate(c: AbstractControl): ValidationErrors {
-    if (c.value === 'Graz' || c.value === 'Hamburg' || c.value === 'Frankfurt' || c.value === 'Wien' || c.value === 'Mallorca') {
+    const validCities = ['Graz', 'Hamburg', 'Frankfurt', 'Wien', 'Mallorca'];
+
+    if (validCities.indexOf(c.value) >= 0) {
       return {};
     }
+    console.log('planet', this.planet);
 
     return {
-      appCity: true
+      city: {
+        actualCity: c.value,
+        validCities
+      }
     };
   }
 }
